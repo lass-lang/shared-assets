@@ -4,10 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "vite build"
+    "build": "vite build",
+    "prepare": "husky"
   },
   "devDependencies": {
     "vite": "^6.0.0",
-    "@lass-lang/vite-plugin-lass": "workspace:*"
+    "@lass-lang/vite-plugin-lass": "workspace:*",
+    "husky": "^9.1.7"
   }
 }
