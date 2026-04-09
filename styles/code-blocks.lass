@@ -1,0 +1,50 @@
+/* Code blocks — Shiki-rendered with dual-theme support */
+
+@layer components {
+pre.shiki {
+  background-color: var(--color-code-bg) !important;
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--font-size-sm);
+  line-height: 1.7;
+  border: 1px solid var(--color-code-border);
+}
+
+/* Shiki dual-theme: light mode activates --shiki-light CSS custom properties */
+@media (prefers-color-scheme: light) {
+  pre.shiki span {
+    color: var(--shiki-light) !important;
+  }
+}
+
+/*
+ * WCAG AA comment color overrides (minimum 4.5:1 contrast ratio)
+ * Shiki's github-dark/light themes use #6A737D for comments, which fails
+ * or barely passes WCAG AA on typical code block backgrounds.
+ *
+ * Replacements (verified against Shiki theme backgrounds #24292e / #fff):
+ * Dark:  #57ab5a on #24292e = 5.15:1 (green, AA compliant)
+ * Light: #1a7f37 on #ffffff = 5.08:1 (dark green, AA compliant)
+ *
+ * Targets: comment scopes (comment.line.separator.lass, comment.line.double-slash)
+ * These are the --- delimiter lines and // line comments
+ *
+ * Note: [style*= i] flag makes this case-insensitive for resilience
+ * against Shiki output format changes (uppercase vs lowercase hex).
+ */
+pre.shiki span[style*="6A737D" i] {
+  color: #57ab5a !important;
+  --shiki-light: #1a7f37;
+}
+
+/* Language label for code blocks */
+.code-lang {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  pointer-events: none;
+  user-select: none;
+}
+}
